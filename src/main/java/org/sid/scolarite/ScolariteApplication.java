@@ -1,30 +1,26 @@
 package org.sid.scolarite;
 
-import org.sid.dao.EtudiantService;
-import org.sid.entities.Etudiant;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.sid.scolarite.dao.EtudiantRepository;
+import org.sid.scolarite.entities.Etudiant;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
-
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class ScolariteApplication implements CommandLineRunner {
+private final EtudiantRepository etudiantRepository;
 
-   private final EtudiantService etudiantService;
-
-    public ScolariteApplication(EtudiantService etudiantService) {
-        this.etudiantService = etudiantService;
+    public ScolariteApplication(EtudiantRepository etudiantRepository) {
+        this.etudiantRepository = etudiantRepository;
     }
-
-
 
     public static void main(String[] args) {
         SpringApplication.run(ScolariteApplication.class, args);
-        /*EtudiantRepository etudiantRepository = context.getBean(EtudiantRepository.class);
+     /*   EtudiantRepository etudiantRepository = context.getBean(EtudiantRepository.class);
         etudiantRepository.save(new Etudiant(null,"Landry","landry@gmail.com", new Date(),50));
         etudiantRepository.save(new Etudiant(null,"Placide","placide@gmail.com", new Date(),55));
         etudiantRepository.save(new Etudiant(null,"Joel","joel@gmail.com", new Date(),60));
@@ -36,19 +32,15 @@ public class ScolariteApplication implements CommandLineRunner {
 
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-
-    }
-
-      /*  @Override
+       @Override
     public void run(String... args) throws Exception{
-    etudiantService.saveEdutiant(new Etudiant(null,"Landry","landry@gmail.com", new Date(),50));
-        etudiantService.saveEdutiant(new Etudiant(null,"Placide","placide@gmail.com", new Date(),55));
-        etudiantService.saveEdutiant(new Etudiant(null,"Joel","joel@gmail.com", new Date(),60));
-
-        etudiantService.etudiantList().forEach(et->{
-            System.out.println(et.toString());
-        });
-    }*/
+           List<Etudiant> etudiants = Arrays.asList(
+                   new  Etudiant(null,"len","emai",new Date(),50),
+                   new Etudiant(null,"Placide","placide@gmail.com", new Date(),55),
+                   new Etudiant(null,"Joel","joel@gmail.com", new Date(),60)
+           );
+   etudiants.forEach(etudiant -> {
+       System.out.println(etudiant);
+   });
+    }
 }
